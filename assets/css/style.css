@@ -3,7 +3,7 @@
   font-size: 48px;
   margin-top: 20px;
 }
-.header {
+header {
   padding: 20px 35px;
   background-color: var(--tertiary-color);
   display: flex;
