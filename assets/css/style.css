@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #040404;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+header {
+  padding: 20px 35px;
+  background-color: #1f5eac;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  opacity: 85%;
+}
+
+header h1 {
+  font-weight: bold;
+  font-size: 25px;
+  color: #fce138;
+  margin: 0;
+  display: inline;
+}
+header a {
+  text-decoration: none;
+  color: #fce138;
+}
+
+footer {
+  background: #1f5eac;
+  width: 100%;
+  padding: 40px 35px;
+  opacity: 85%;
+}
+
+footer h2 {
+  display: inline;
+  color: #fce138;
+  font-size: 30px;
+  margin: 0;
+}
+
+footer a {
+  color: #1f5eac;
+}
+
+.form {
+  background-image: url("../images/medicine\ background\ photo.webp");
+  height: 600px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.contact-form {
+  background-color: #fce138;
+  padding: 20px;
+  width: 500px;
+  color: #024e76;
+  position: absolute;
+  bottom: 100x;
+  top: 150px;
+  right: 650px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 10px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 15px;
+  text-align: left;
+}
+
+.contact-form h3 {
+  font-size: 24px;
+  margin: 0;
+}
+.contact-form p {
+  margin: 5px 0 15px 0;
+}
+
+.form-input {
+  border: 1px solid #024e76;
+  display: block;
+  padding: 7px 15px;
+  font-size: 16px;
+  color: #024e76;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.contact-form label {
+  margin: 0 5px;
+}
+
+.contact-form button {
+  color: #fce138;
+  background-color: #024e76;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+}

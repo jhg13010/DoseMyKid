@@ -1,12 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>Pediatric Dose Calculator</title>
+  </head>
+  <body>
+    <header class="header">
+      DOSE <h1>MyKid</h1>
+      </header>
+
+      <section class="form">
+        <div class="contact-form">
+          <h3>Get Started Here!</h3>
+          <p>Please fill out this form to add your child's information</p>
+      <form>
+        <label for="name">Enter Your Child's Full Name:</label><br>
+        <input type="text" placeholder="Child's Name" name="name" id="name" /><br>
+        <label for="email">Enter Your Child's Age:</label><br>
+        <input type="text" placeholder="Age" name="age" id="age" /><br>
+        <label for="phone">Enter Your Child's Weight:</label><br>
+        <input type="text" placeholder="Weight" name="weight" id="weight"/><br>
+      <label for="name">Enter the Medication You Wish to Calculate:</label><br>
+        <input type="text" placeholder="Medication's Name" name="medication" id="medication" />
+      
+       <p>
+        <label for="checkbox" >
+          I acknowledge that I am the Parent/Guardian of the child mentioned above
+          </label>
+          <input type="checkbox" name="consent-confirm" id="checkbox" />
+          </p>
+          <button type="submit">
+          Lets Calculate!
+          </button>
+      </form>  
+      </div>
+      </section>
+    <footer class="footer">
+      <div>
+      <h2>Disclaimer</h2>
+      <p>
+        Please consult with your primary care provider, or pharmacist, before administering any medication.
+      </p>
+    </footer>
+  </body>
 </html>
+
