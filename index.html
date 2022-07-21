@@ -9,32 +9,40 @@
   </head>
   <body>
     <header class="header">
-      <h1>Dose</h1>
-      <h1 id="mykid">MyKid</h1>
-      <form class="text">
-        <h3>Get Started Here:</h3>
-        <!-- Name section -->
-        <label for="Name">Name:</label><br />
-        <input type="text" id="name" name="name" /><br />
-        <!-- Age Section -->
-        <label for="Name">Age:</label><br />
-        <input type="text" id="age" name="age" /><br />
-        <!-- Weight Section -->
-        <label for="Name">Weight:</label><br />
-        <input type="text" id="weight" name="weight" /><br />
-        <!-- Medication Section -->
-        <label for="Name">Medication:</label><br />
-        <input type="text" id="medication" name="medication" /><br />
-      </form>
-    </header>
+      DOSE <h1>MyKid</h1>
+      </header>
 
-    <script src="app.js"></script>
+      <section class="form">
+        <div class="contact-form">
+          <h3>Get Started Here!</h3>
+          <p>Please fill out this form to add your child's information</p>
+      <form>
+        <label for="name">Enter Your Child's Full Name:</label><br>
+        <input type="text" placeholder="Child's Name" name="name" id="name" /><br>
+        <label for="email">Enter Your Child's Age:</label><br>
+        <input type="text" placeholder="Age" name="age" id="age" /><br>
+        <label for="phone">Enter Your Child's Weight:</label><br>
+        <input type="text" placeholder="Weight" name="weight" id="weight"/><br>
+      <label for="name">Enter the Medication You Wish to Calculate:</label><br>
+        <input type="text" placeholder="Medication's Name" name="medication" id="medication" />
+      
+       <p>
+        <label for="checkbox" >
+          I acknowledge that I am the Parent/Guardian of the child mentioned above
+          </label>
+          <input type="checkbox" name="consent-confirm" id="checkbox" />
+          </p>
+          <button type="submit">
+          Lets Calculate!
+          </button>
+      </form>  
+      </div>
+      </section>
     <footer class="footer">
       <div>
       <h2>Disclaimer</h2>
       <p>
-        Please consult with your primary care provider or pharmacist regarding
-        medications before administration
+        Please consult with your primary care provider, or pharmacist, before administering any medication.
       </p>
     </footer>
   </body>
