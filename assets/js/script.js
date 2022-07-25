@@ -1,30 +1,33 @@
-// get variables from the dom 
-var weightEl = document.querySelector("#lbs");
-var dosageEl = document.querySelector("#dosge");
 
+var button = document.querySelector("#btn");
 
+var dosageConversion = function () {
+    // get variables from the dom 
+    var weightEl = document.querySelector("#weight");
+    console.log(weightEl.value);
+    //convert weight from lbs to kgs
+    var weightKgs = (weightEl.value / 2.205).toFixed(2);
+        console.log(weightKgs);    
+    
+    //get dosage from the dom
+    var dosageEl = document.querySelectorAll("dosage");
+    console.log(dosageEl.value);
 
+    var dosageEl = document.querySelector("#dosage");
+        console.log(dosageEl.value);
 
-// event listener for wight
-weightEl.addEventListener('click', function () {
+    
+}
 
-    // // fetch 
-    // fetch(`https://api.fda.gov/drug/drugsfda.json?search=${weightEl.value}products.dosage_form:"LOTION"&limit=1`)
-    //     .then(function (response) {
-    //         return response.json()
-    //     })
-    //     .then(function (data) {
-    //         console.log(data)
-    //     })
-    // save users value
-    var input = document.getElementById("input").value
-    console.log(input)
+// event listener for form submission
+button.addEventListener('click', dosageConversion);
 
-    // display in the output 
+var getDrugInfo = function() {
+    fetch("https://api.fda.gov/drug/label.json?search=overdosage:'benadryl'").then(function(response) {
+        return response.json().then(function(data) {
+            console.log(data);
+        });
+    });
+};
 
-    // document.getElementById('output').value = input / 2.2 + "kilograms"
-
-    var output = document.getElementById('output').value = (input / 2.2).toFixed(2)
-    console.log(lbs)
-
-})
+getDrugInfo();
