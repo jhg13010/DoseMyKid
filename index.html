@@ -11,36 +11,33 @@
     <header class="header">
       <h1>Dose</h1>
       <h1 id="mykid">MyKid</h1>
-      <form class="text">
+      <form class="text" id="drug-form">
         <h3>Get Started Here:</h3>
         <!-- Name section -->
         <label for="Name">Name:</label><br />
-        <input type="text" id="name" name="name" /><br />
+        <input type="text" id="name" name="name" placeholder="Enter your child's name" /><br />
         <!-- Age Section -->
         <label for="Name">Age:</label><br />
-        <input type="text" id="age" name="age" /><br />
+        <input type="text" id="age" name="age" placeholder="Enter you child's age" /><br />
         <!-- Weight Section -->
         <label for="Name">Weight:</label><br />
-        <input type="text" id="weight" name="weight" /><br />
+        <input type="text" id="weight" name="weight" placeholder="Enter your child's weight" /><br />
         <!-- Medication Section -->
         <label for="Name">Medication:</label><br />
-        <input type="text" id="medication" name="medication" /><br />
+        <input type="text" id="medication" name="medication" placeholder="Enter the medication you child will be taking" /><br />
         <!--Dosage Section-->
         <label for="Name">Adult Dosage:</label><br />
-        <input type="text" id="dosage" name="dosage" /><br />
+        <input type="text" id="dosage" name="dosage" placeholder="Enter the adult dosage" /><br />
         <button id="btn">Submit</button>
       </form>
     </header>
 
-
-    <!--
-    <section class="drug">
-      <div class="container">
-        <input type="text" id="input">
-        <button id="lbs"> weight</button> <button id="dosage"> dosage amount</button>
-        <input type="text" id="output">
-      </div>
-    </section> -->
+    <main>
+      <container>
+        <h2>My Drug List</h2>
+        <ul id="drug-list"></ul>
+      </container>
+    </main>
 
     <script src="./assets/js/script.js"></script>
     <footer class="footer">
