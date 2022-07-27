@@ -41,7 +41,7 @@ var formSubmitHandler = function(event) {
                 console.log("ERROR WITH DATA"); 
             };
         })
-    }
+    };
 
     var displayDrugInfo = function(info) {
         var drugIndication = info.results[0].indications_and_usage[0];
@@ -52,6 +52,15 @@ var formSubmitHandler = function(event) {
         } else if (drugIndication.includes("allergic")) {
             drugUseInput = "Allergies";
         }
+        var drugDataObj = {
+            name: drugNameInput,
+            age: drugAgeInput,
+            weight: drugWeightInput,
+            medication: drugMedicationInput,
+            dosage: drugDosageInput,
+            indication: drugUseInput,
+        }
+        createDrugEl(drugDataObj);
     }   
 
     var getDosage = function() {
@@ -72,16 +81,6 @@ var formSubmitHandler = function(event) {
     //reset form 
     formEl.reset();
 
-    var drugDataObj = {
-        name: drugNameInput,
-        age: drugAgeInput,
-        weight: drugWeightInput,
-        medication: drugMedicationInput,
-        dosage: drugDosageInput,
-        indication: drugUseInput,
-    }
-
-    createDrugEl(drugDataObj);
 }
 
 var createDrugEl = function(drugDataObj) {
@@ -136,8 +135,8 @@ var saveDrugs = function() {
 // event listener for form submission
 buttonEl.addEventListener('click', formSubmitHandler);
 
-
-    /*fetch("https://api.lexigram.io/v1/lexigraph/extract/entities", {
+/*var secondApi = function() {
+    fetch("https://api.lexigram.io/v1/extract/entities", {
         headers: {
           Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdSI6Imx4ZzphcGkiLCJzYyI6WyJrZzpyZWFkIiwiZXh0cmFjdGlvbjpyZWFkIl0sImFpIjoiYXBpOmI3MjgzNWE1LTA0MzgtYThhMi04OTg0LWMxMTcxNzUxNTI5OCIsInVpIjoidXNlcjo1ZDIzNzk4Zi1mMmFmLWJlMzgtMTgyZS0wMjM2OGU3Zjk5MWYiLCJpYXQiOjE2NTg4OTIwNTl9.5AyZ5D6zH9udQS-4r1N4-2n8cBGyBF3Tji-F4X_dgac"
         }
@@ -145,4 +144,7 @@ buttonEl.addEventListener('click', formSubmitHandler);
         return response.json().then(function(data) {
             console.log(data);
         });
-    });*/
+    });
+}
+
+secondApi();*/
