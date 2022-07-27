@@ -14,6 +14,8 @@ var formSubmitHandler = function(event) {
     event.preventDefault();
 
     // get variables from the dom 
+    var drugNameInput = document.querySelector("#name").value
+    var drugAgeInput = document.querySelector("#age").value
     var drugWeightInput = document.querySelector("#weight").value;
     var drugMedicationInput = document.querySelector("#medication").value;
     var drugDosageInput = "";
@@ -43,6 +45,8 @@ var formSubmitHandler = function(event) {
     formEl.reset();
 
     var drugDataObj = {
+        name: drugNameInput,
+        age: drugAgeInput,
         weight: (drugWeightInput / 2.205).toFixed(2),
         medication: drugMedicationInput,
         dosage: drugDosageInput,
@@ -63,12 +67,22 @@ var createDrugEl = function(drugDataObj) {
 
     //create a heading for the li
     var drugHeadingEl=document.createElement("div");
-    drugHeadingEl.className = "drug-heading"
+    drugHeadingEl.className = "drug-heading";
 
     //create the heading for the li
-    drugHeadingEl.innerHTML = "<h3 class='drug-name'>" + drugDataObj.medication + "</h3>";
+    drugHeadingEl.innerHTML = "<h2 class='drug-name'>" + drugDataObj.medication + "</h2>";
     //append heading to the li 
-    listItemEl.appendChild(drugHeadingEl);  
+    listItemEl.appendChild(drugHeadingEl); 
+    
+    var drugDosageEl=document.createElement("div");
+    drugDosageEl.className="dosage-info";
+    drugDosageEl.innerHTML = "<h3 class='dosage-info'> Your Child's Dose: " + drugDataObj.dosage + "</h3>";
+    listItemEl.appendChild(drugDosageEl);
+
+    var patientInfoEl=document.createElement("p");
+    patientInfoEl.className="patient-info";
+    patientInfoEl.innerHTML = "Name: " + drugDataObj.name + "<br> Age: " + drugDataObj.age;
+    listItemEl.appendChild(patientInfoEl)
 
     //append drug query to the queries listing
     drugListEl.appendChild(listItemEl);
@@ -88,16 +102,6 @@ var saveDrugs = function() {
     localStorage.setItem("drugs", JSON.stringify(drugs));
 }
 
-/*var dosageConversion = function () {
-    //convert weight from lbs to kgs
-    var weightKgs = (weightEl.value / 2.205).toFixed(2);
-        console.log(weightKgs);    
-
-    var dosageEl = document.querySelector("#dosage");
-        console.log(dosageEl.value);
-
-    
-}*/
 
 // event listener for form submission
 buttonEl.addEventListener('click', formSubmitHandler);
@@ -108,7 +112,16 @@ var getDrugInfo = function() {
             console.log(data.results[0]);
         });
     });
+
+    /*fetch("https://api.lexigram.io/v1/lexigraph/extract/entities", {
+        headers: {
+          Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdSI6Imx4ZzphcGkiLCJzYyI6WyJrZzpyZWFkIiwiZXh0cmFjdGlvbjpyZWFkIl0sImFpIjoiYXBpOmI3MjgzNWE1LTA0MzgtYThhMi04OTg0LWMxMTcxNzUxNTI5OCIsInVpIjoidXNlcjo1ZDIzNzk4Zi1mMmFmLWJlMzgtMTgyZS0wMjM2OGU3Zjk5MWYiLCJpYXQiOjE2NTg4OTIwNTl9.5AyZ5D6zH9udQS-4r1N4-2n8cBGyBF3Tji-F4X_dgac"
+        }
+    }).then(function(response) {
+        return response.json().then(function(data) {
+            console.log(data);
+        });
+    });*/
 };
 
-getDrugInfo();
-
+getDrugInfo()
