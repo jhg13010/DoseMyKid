@@ -10,46 +10,75 @@ var drugIdCounter = 0;
 //drugs array for storage 
 var drugs = []
 
+
 var formSubmitHandler = function(event) {
     event.preventDefault();
 
     // get variables from the dom 
-    var drugNameInput = document.querySelector("#name").value
-    var drugAgeInput = document.querySelector("#age").value
-    var drugWeightInput = document.querySelector("#weight").value;
+    var drugNameInput = document.querySelector("#name").value;
+    var drugAgeInput = document.querySelector("#age").value;
+    var drugWeightInput = (document.querySelector("#weight").value / 2.205).toFixed(2);
     var drugMedicationInput = document.querySelector("#medication").value;
-    var drugDosageInput = "";
-
+    var drugDosageInput = ""
+    var drugUseInput = ""
+    
     //validate inputs 
     if (!drugWeightInput || !drugMedicationInput) {
         //NEED TO CONVERT TO MODAL
         alert("You need to fill out the full form");
         return false;
     }
+    
+    var getDrugInfo = function(drug) {
+        var apiUrlFDA = "https://api.fda.gov/drug/label.json?search=indications_and_usage:" + drug;
+
+        var drugInfo = fetch(apiUrlFDA).then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    displayDrugInfo(data);
+                });
+            } else {
+                console.log("ERROR WITH DATA");
+            };
+        });
+    }
+
+    var displayDrugInfo = function(info) {
+        var drugIndication = info.results[0].indications_and_usage[0];
+    
+        if (drugIndication.includes("pain" || "PAIN")) {
+            drugUseInput = "Pain";
+
+        } else if (drugIndication.includes("allergic")) {
+            drugUseInput = "Allergies";
+        };
+    };
 
     var getDosage = function() {
         if (drugMedicationInput === "Acetaminophen") {
             drugDosageInput = drugWeightInput*15 + "mgs";
-
+    
         } else if (drugMedicationInput === "Ibuprofen") {
             drugDosageInput = drugWeightInput*10 + "mgs";
-
-        } else if (drugMedicationInput === "Benedryl") {
+    
+        } else if (drugMedicationInput === "Benadryl") {
             drugDosageInput = drugWeightInput*2 +"mgs";
         };
-    }   
+    } 
 
     getDosage();
- 
+    getDrugInfo(drugMedicationInput);
+
     //reset form 
     formEl.reset();
 
     var drugDataObj = {
         name: drugNameInput,
         age: drugAgeInput,
-        weight: (drugWeightInput / 2.205).toFixed(2),
+        weight: drugWeightInput,
         medication: drugMedicationInput,
         dosage: drugDosageInput,
+        indication: drugUseInput,
     }
 
     createDrugEl(drugDataObj);
@@ -106,12 +135,10 @@ var saveDrugs = function() {
 // event listener for form submission
 buttonEl.addEventListener('click', formSubmitHandler);
 
-var getDrugInfo = function() {
-    fetch("https://api.fda.gov/drug/label.json?search=dosage_forms_and_strengths:'acetaminophen'").then(function(response) {
-        return response.json().then(function(data) {
-            console.log(data.results[0]);
-        });
-    });
+
+
+
+
 
     /*fetch("https://api.lexigram.io/v1/lexigraph/extract/entities", {
         headers: {
@@ -122,6 +149,3 @@ var getDrugInfo = function() {
             console.log(data);
         });
     });*/
-};
-
-getDrugInfo()
