@@ -16,22 +16,36 @@ var formSubmitHandler = function(event) {
     // get variables from the dom 
     var drugWeightInput = document.querySelector("#weight").value;
     var drugMedicationInput = document.querySelector("#medication").value;
-    var drugDosageInput = document.querySelector("#dosage").value;
+    var drugDosageInput = "";
 
     //validate inputs 
-    if (!drugWeightInput || !drugDosageInput || !drugMedicationInput) {
+    if (!drugWeightInput || !drugMedicationInput) {
         //NEED TO CONVERT TO MODAL
         alert("You need to fill out the full form");
         return false;
     }
 
+    var getDosage = function() {
+        if (drugMedicationInput === "Acetaminophen") {
+            drugDosageInput = drugWeightInput*15 + "mgs";
+
+        } else if (drugMedicationInput === "Ibuprofen") {
+            drugDosageInput = drugWeightInput*10 + "mgs";
+
+        } else if (drugMedicationInput === "Benedryl") {
+            drugDosageInput = drugWeightInput*2 +"mgs";
+        };
+    }   
+
+    getDosage();
+ 
     //reset form 
     formEl.reset();
 
     var drugDataObj = {
-        weight: drugWeightInput,
-        dosage: drugDosageInput,
+        weight: (drugWeightInput / 2.205).toFixed(2),
         medication: drugMedicationInput,
+        dosage: drugDosageInput,
     }
 
     createDrugEl(drugDataObj);
@@ -54,7 +68,7 @@ var createDrugEl = function(drugDataObj) {
     //create the heading for the li
     drugHeadingEl.innerHTML = "<h3 class='drug-name'>" + drugDataObj.medication + "</h3>";
     //append heading to the li 
-    listItemEl.appendChild(drugHeadingEl);
+    listItemEl.appendChild(drugHeadingEl);  
 
     //append drug query to the queries listing
     drugListEl.appendChild(listItemEl);
