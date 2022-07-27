@@ -90,7 +90,7 @@ var saveDrugs = function() {
 buttonEl.addEventListener('click', formSubmitHandler);
 
 var getDrugInfo = function() {
-    fetch("https://api.fda.gov/drug/label.json?search=dosage_forms_and_strengths:'xanax'").then(function(response) {
+    fetch("https://api.fda.gov/drug/label.json?search=dosage_forms_and_strengths:'acetaminophen'").then(function(response) {
         return response.json().then(function(data) {
             console.log(data.results[0]);
         });
