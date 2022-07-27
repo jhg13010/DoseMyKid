@@ -13,12 +13,13 @@ header {
   padding: 20px 35px;
   background-color: #1f5eac;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 25px;
+  color: black;
   opacity: 85%;
 }
-
 header h1 {
   font-weight: bold;
-  font-size: 25px;
+  font-size: 40px;
   color: #fce138;
   margin: 0;
   display: inline;
@@ -31,7 +32,7 @@ header a {
 .pageend {
   background: #1f5eac;
   width: 100%;
-  padding: 40px 35px;
+  padding: 15px 25px;
   opacity: 85%;
 }
 
