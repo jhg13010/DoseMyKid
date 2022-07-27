@@ -21,7 +21,7 @@ var formSubmitHandler = function(event) {
     var drugMedicationInput = document.querySelector("#medication").value;
     var drugDosageInput = ""
     var drugUseInput = ""
-    
+
     //validate inputs 
     if (!drugWeightInput || !drugMedicationInput) {
         //NEED TO CONVERT TO MODAL
@@ -38,9 +38,9 @@ var formSubmitHandler = function(event) {
                     displayDrugInfo(data);
                 });
             } else {
-                console.log("ERROR WITH DATA");
+                console.log("ERROR WITH DATA"); 
             };
-        });
+        })
     }
 
     var displayDrugInfo = function(info) {
@@ -51,19 +51,19 @@ var formSubmitHandler = function(event) {
 
         } else if (drugIndication.includes("allergic")) {
             drugUseInput = "Allergies";
-        };
-    };
+        }
+    }   
 
     var getDosage = function() {
         if (drugMedicationInput === "Acetaminophen") {
             drugDosageInput = drugWeightInput*15 + "mgs";
     
-        } else if (drugMedicationInput === "Ibuprofen") {
+        } else if (drugMedicationInput === "Ibuprofen") {   
             drugDosageInput = drugWeightInput*10 + "mgs";
     
         } else if (drugMedicationInput === "Benadryl") {
             drugDosageInput = drugWeightInput*2 +"mgs";
-        };
+        }
     } 
 
     getDosage();
@@ -127,17 +127,14 @@ var createDrugEl = function(drugDataObj) {
     saveDrugs();
 }
 
+console.log(drugs);
+
 var saveDrugs = function() {
     localStorage.setItem("drugs", JSON.stringify(drugs));
 }
 
-
 // event listener for form submission
 buttonEl.addEventListener('click', formSubmitHandler);
-
-
-
-
 
 
     /*fetch("https://api.lexigram.io/v1/lexigraph/extract/entities", {
