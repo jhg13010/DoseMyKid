@@ -13,10 +13,10 @@
     </header>
 
     <section class="form">
-      <div class="contact-form">
+      <div class="drug-form">
         <h3>Get Started Here!</h3>
         <p>Please fill out this form to add your child's information</p>
-        <form>
+        <form id="drug-form">
           <label for="name">Enter Your Child's Full Name:</label><br>
           <input type="text" placeholder="Child's Name" name="name" id="name" /><br>
           <label for="email">Enter Your Child's Age:</label><br>
@@ -24,14 +24,16 @@
           <label for="phone">Enter Your Child's Weight:</label><br>
           <input type="text" placeholder="Weight" name="weight" id="weight"/><br>
           <label for="name">Enter the Medication You Wish to Calculate:</label><br>
-          <input type="text" placeholder="Medication's Name" name="medication" id="medication" />
+          <input type="text" placeholder="Medication's Name" name="medication" id="medication"/><br>
+          <label for="dosage">Enter the adult dosage of the Medication:</label><br>
+          <input type="text" placeholder="Adult Dosage" name="dosage" id="dosage" />
           <p>
             <label for="checkbox" >
             I acknowledge that I am the Parent/Guardian of the child mentioned above
             </label>
             <input type="checkbox" name="consent-confirm" id="checkbox" />
           </p>  
-          <button type="submit">
+          <button id="btn" type="submit">
             Lets Calculate!
           </button>
         </form>  

@@ -54,7 +54,7 @@ footer a {
   position: relative;
 }
 
-.contact-form {
+.drug-form {
   background-color: #fce138;
   padding: 20px;
   width: 500px;
@@ -70,11 +70,11 @@ footer a {
   text-align: left;
 }
 
-.contact-form h3 {
+.drug-form h3 {
   font-size: 24px;
   margin: 0;
 }
-.contact-form p {
+.drug-form p {
   margin: 5px 0 15px 0;
 }
 
@@ -88,56 +88,14 @@ footer a {
   margin-bottom: 15px;
 }
 
-.contact-form label {
+.drug-form label {
   margin: 0 5px;
 }
 
-<<<<<<< HEAD
-.contact-form button {
+.drug-form button {
   color: #fce138;
   background-color: #024e76;
   border: none;
   padding: 10px 20px;
   font-size: 16px;
-=======
-.container{
-  display: grid;
-  height: 200px;
-  width: 550px;
-  margin: auto;
-  border: 5px solid black;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 25px 1fr;
-}
-
-/* #input{
-  height: 20px;
-  width: 200px;
-  grid-column-start: 2;
-  grid-column-end: 4;
-  justify-content: center;
-  align-self: center;
-}
-
-#lbs{
-  height: 20px;
-  width: 200px;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row: 2;
-  justify-content: center;
-}
-
-#dosage{
-  height: 20px;
-  width: 200px;
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row: 2;
-  
-  justify-content: center;
-} */
-footer a {
-  color: #1c79ab;
->>>>>>> calculator
 }
