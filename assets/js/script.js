@@ -110,7 +110,7 @@ var createDrugEl = function(drugDataObj) {
 
     var patientInfoEl=document.createElement("p");
     patientInfoEl.className="patient-info";
-    patientInfoEl.innerHTML = "Name: " + drugDataObj.name + "<br> Age: " + drugDataObj.age;
+    patientInfoEl.innerHTML = "Name: " + drugDataObj.name + "<br> Age: " + drugDataObj.age + "<br> Indication: " + drugDataObj.indication;
     listItemEl.appendChild(patientInfoEl)
 
     //append drug query to the queries listing
