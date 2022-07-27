@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>Pediatric Dose Calculator</title>
   </head>
   <body>
@@ -14,7 +15,7 @@
 
     <section class="form">
       <div class="drug-form">
-        <h3>Get Started Here!</h3>
+        <h1 class="subtitle is-1">Get Started Here</h1>
         <p>Please fill out this form to add your child's information</p>
         <form id="drug-form">
           <label for="name">Enter Your Child's Full Name:</label><br>
@@ -22,11 +23,16 @@
           <label for="email">Enter Your Child's Age:</label><br>
           <input type="text" placeholder="Age" name="age" id="age" /><br>
           <label for="phone">Enter Your Child's Weight:</label><br>
-          <input type="text" placeholder="Weight" name="weight" id="weight"/><br>
-          <label for="name">Enter the Medication You Wish to Calculate:</label><br>
-          <input type="text" placeholder="Medication's Name" name="medication" id="medication"/><br>
-          <label for="dosage">Enter the adult dosage of the Medication:</label><br>
-          <input type="text" placeholder="Adult Dosage" name="dosage" id="dosage" />
+          <input type="text" placeholder="Weight in Pounds" name="weight" id="weight"/><br>
+         <label>Choose Medication you wish to Calculate:</label><br>
+<form>
+<select id="medication">
+<option value="Acetaminophen">Acetaminophen</option>
+<option value="Ibuprofen">Ibuprofen</option>
+<option value="Benadryl">Benadryl</option>
+</select>
+</form>
+      
           <p>
             <label for="checkbox" >
             I acknowledge that I am the Parent/Guardian of the child mentioned above
@@ -36,15 +42,20 @@
           <button id="btn" type="submit">
             Lets Calculate!
           </button>
-        </form>  
+        </form> 
+
       </div>
     </section>
-    <main>
-      <container>
-        <h2>My Drug List</h2>
-        <ul id="drug-list"></ul>
-      </container>
-    </main>
+    <section class="results">
+    <div class="drug-list">
+          <h1 class="subtitle is-1">Dose Results</h1>
+        
+           
+  
+  
+          </div>
+          </section>
+            
 
     <footer class="footer">
       <div>
