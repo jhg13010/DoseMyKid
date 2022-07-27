@@ -10,13 +10,17 @@ var drugIdCounter = 0;
 //drugs array for storage 
 var drugs = []
 
+
 var formSubmitHandler = function(event) {
     event.preventDefault();
 
     // get variables from the dom 
-    var drugWeightInput = document.querySelector("#weight").value;
+    var drugNameInput = document.querySelector("#name").value;
+    var drugAgeInput = document.querySelector("#age").value;
+    var drugWeightInput = (document.querySelector("#weight").value / 2.205).toFixed(2);
     var drugMedicationInput = document.querySelector("#medication").value;
-    var drugDosageInput = "";
+    var drugDosageInput = ""
+    var drugUseInput = ""
 
     //validate inputs 
     if (!drugWeightInput || !drugMedicationInput) {
@@ -24,31 +28,59 @@ var formSubmitHandler = function(event) {
         alert("You need to fill out the full form");
         return false;
     }
+    
+    var getDrugInfo = function(drug) {
+        var apiUrlFDA = "https://api.fda.gov/drug/label.json?search=indications_and_usage:" + drug;
+
+        var drugInfo = fetch(apiUrlFDA).then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    displayDrugInfo(data);
+                });
+            } else {
+                console.log("ERROR WITH DATA"); 
+            };
+        })
+    };
+
+    var displayDrugInfo = function(info) {
+        var drugIndication = info.results[0].indications_and_usage[0];
+    
+        if (drugIndication.includes("pain" || "PAIN")) {
+            drugUseInput = "Pain";
+
+        } else if (drugIndication.includes("allergic")) {
+            drugUseInput = "Allergies";
+        }
+        var drugDataObj = {
+            name: drugNameInput,
+            age: drugAgeInput,
+            weight: drugWeightInput,
+            medication: drugMedicationInput,
+            dosage: drugDosageInput,
+            indication: drugUseInput,
+        }
+        createDrugEl(drugDataObj);
+    }   
 
     var getDosage = function() {
         if (drugMedicationInput === "Acetaminophen") {
             drugDosageInput = drugWeightInput*15 + "mgs";
-
-        } else if (drugMedicationInput === "Ibuprofen") {
+    
+        } else if (drugMedicationInput === "Ibuprofen") {   
             drugDosageInput = drugWeightInput*10 + "mgs";
-
-        } else if (drugMedicationInput === "Benedryl") {
+    
+        } else if (drugMedicationInput === "Benadryl") {
             drugDosageInput = drugWeightInput*2 +"mgs";
-        };
-    }   
+        }
+    } 
 
     getDosage();
- 
+    getDrugInfo(drugMedicationInput);
+
     //reset form 
     formEl.reset();
 
-    var drugDataObj = {
-        weight: (drugWeightInput / 2.205).toFixed(2),
-        medication: drugMedicationInput,
-        dosage: drugDosageInput,
-    }
-
-    createDrugEl(drugDataObj);
 }
 
 var createDrugEl = function(drugDataObj) {
@@ -63,12 +95,22 @@ var createDrugEl = function(drugDataObj) {
 
     //create a heading for the li
     var drugHeadingEl=document.createElement("div");
-    drugHeadingEl.className = "drug-heading"
+    drugHeadingEl.className = "drug-heading";
 
     //create the heading for the li
-    drugHeadingEl.innerHTML = "<h3 class='drug-name'>" + drugDataObj.medication + "</h3>";
+    drugHeadingEl.innerHTML = "<h2 class='drug-name'>" + drugDataObj.medication + "</h2>";
     //append heading to the li 
-    listItemEl.appendChild(drugHeadingEl);  
+    listItemEl.appendChild(drugHeadingEl); 
+    
+    var drugDosageEl=document.createElement("div");
+    drugDosageEl.className="dosage-info";
+    drugDosageEl.innerHTML = "<h3 class='dosage-info'> Your Child's Dose: " + drugDataObj.dosage + "</h3>";
+    listItemEl.appendChild(drugDosageEl);
+
+    var patientInfoEl=document.createElement("p");
+    patientInfoEl.className="patient-info";
+    patientInfoEl.innerHTML = "Name: " + drugDataObj.name + "<br> Age: " + drugDataObj.age + "<br> Indication: " + drugDataObj.indication;
+    listItemEl.appendChild(patientInfoEl)
 
     //append drug query to the queries listing
     drugListEl.appendChild(listItemEl);
@@ -84,31 +126,25 @@ var createDrugEl = function(drugDataObj) {
     saveDrugs();
 }
 
+console.log(drugs);
+
 var saveDrugs = function() {
     localStorage.setItem("drugs", JSON.stringify(drugs));
 }
 
-/*var dosageConversion = function () {
-    //convert weight from lbs to kgs
-    var weightKgs = (weightEl.value / 2.205).toFixed(2);
-        console.log(weightKgs);    
-
-    var dosageEl = document.querySelector("#dosage");
-        console.log(dosageEl.value);
-
-    
-}*/
-
 // event listener for form submission
 buttonEl.addEventListener('click', formSubmitHandler);
 
-var getDrugInfo = function() {
-    fetch("https://api.fda.gov/drug/label.json?search=dosage_forms_and_strengths:'acetaminophen'").then(function(response) {
+/*var secondApi = function() {
+    fetch("https://api.lexigram.io/v1/extract/entities", {
+        headers: {
+          Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdSI6Imx4ZzphcGkiLCJzYyI6WyJrZzpyZWFkIiwiZXh0cmFjdGlvbjpyZWFkIl0sImFpIjoiYXBpOmI3MjgzNWE1LTA0MzgtYThhMi04OTg0LWMxMTcxNzUxNTI5OCIsInVpIjoidXNlcjo1ZDIzNzk4Zi1mMmFmLWJlMzgtMTgyZS0wMjM2OGU3Zjk5MWYiLCJpYXQiOjE2NTg4OTIwNTl9.5AyZ5D6zH9udQS-4r1N4-2n8cBGyBF3Tji-F4X_dgac"
+        }
+    }).then(function(response) {
         return response.json().then(function(data) {
-            console.log(data.results[0]);
+            console.log(data);
         });
     });
-};
+}
 
-getDrugInfo();
-
+secondApi();*/
