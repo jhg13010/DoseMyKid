@@ -8,7 +8,7 @@ body {
   color: #040404;
   font-family: Helvetica, Arial, sans-serif;
 }
-
+/*Dose heading styling*/
 header {
   padding: 20px 35px;
   background-color: #1f5eac;
@@ -17,6 +17,7 @@ header {
   color: black;
   opacity: 85%;
 }
+/*MyKid heading styling*/
 header h1 {
   font-weight: bold;
   font-size: 40px;
@@ -35,7 +36,7 @@ header a {
   padding: 15px 25px;
   opacity: 85%;
 }
-
+/*Disclaimer styling*/
 footer h2 {
   display: inline;
   color: #fce138;
@@ -46,7 +47,7 @@ footer h2 {
 footer a {
   color: #1f5eac;
 }
-
+/*Form styling and placement along with background*/
 .form {
   background-image: url("../images/medicine\ background\ photo.webp");
   height: 600px;
@@ -92,7 +93,7 @@ footer a {
 .drug-form label {
   margin: 0 5px;
 }
-
+/*Let's Calculate button*/
 .drug-form button {
   color: #fce138;
   background-color: #024e76;
