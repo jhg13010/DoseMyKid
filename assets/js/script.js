@@ -19,8 +19,9 @@ var formSubmitHandler = function(event) {
     var drugAgeInput = document.querySelector("#age").value;
     var drugWeightInput = (document.querySelector("#weight").value / 2.205).toFixed(2);
     var drugMedicationInput = document.querySelector("#medication").value;
-    var drugDosageInput = ""
-    var drugUseInput = ""
+    var drugDosageInput = "";
+    var drugUseInput = "";
+    var drugGenericName = "";
 
     //validate inputs 
     if (!drugWeightInput || !drugMedicationInput) {
@@ -41,6 +42,25 @@ var formSubmitHandler = function(event) {
                 console.log("ERROR WITH DATA"); 
             };
         })
+
+        var apiUrlRapid = "https://drug-info-and-price-history.p.rapidapi.com/1/druginfo?drug=" + drug;
+
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': '27a92e4c0cmsh2a354ddcb5cf9b8p1ac9e5jsnd942496c0148',
+                'X-RapidAPI-Host': 'drug-info-and-price-history.p.rapidapi.com'
+            }
+        };
+        fetch(apiUrlRapid, options).then(function(response)
+            .then(response => response.json())
+            .then(response => console.log(response))
+
+            .catch(err => console.error(err));
+
+        
+
+        console.log(drugGenericName)
     };
 
     var displayDrugInfo = function(info) {
@@ -59,6 +79,7 @@ var formSubmitHandler = function(event) {
             medication: drugMedicationInput,
             dosage: drugDosageInput,
             indication: drugUseInput,
+            Generic_Name: drugGenericName;
         }
         createDrugEl(drugDataObj);
     }   
@@ -135,16 +156,8 @@ var saveDrugs = function() {
 // event listener for form submission
 buttonEl.addEventListener('click', formSubmitHandler);
 
-/*var secondApi = function() {
-    fetch("https://api.lexigram.io/v1/extract/entities", {
-        headers: {
-          Authorization: "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdSI6Imx4ZzphcGkiLCJzYyI6WyJrZzpyZWFkIiwiZXh0cmFjdGlvbjpyZWFkIl0sImFpIjoiYXBpOmI3MjgzNWE1LTA0MzgtYThhMi04OTg0LWMxMTcxNzUxNTI5OCIsInVpIjoidXNlcjo1ZDIzNzk4Zi1mMmFmLWJlMzgtMTgyZS0wMjM2OGU3Zjk5MWYiLCJpYXQiOjE2NTg4OTIwNTl9.5AyZ5D6zH9udQS-4r1N4-2n8cBGyBF3Tji-F4X_dgac"
-        }
-    }).then(function(response) {
-        return response.json().then(function(data) {
-            console.log(data);
-        });
-    });
+var secondApi = function() {
+
 }
 
-secondApi();*/
+secondApi();
