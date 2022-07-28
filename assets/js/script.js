@@ -10,6 +10,10 @@ var drugIdCounter = 0;
 //drugs array for storage 
 var drugs = []
 
+var limit = function(string = '', limit = 0) {
+    return string.substring(0, limit);
+}
+
 
 var formSubmitHandler = function(event) {
     event.preventDefault();
@@ -56,8 +60,7 @@ var formSubmitHandler = function(event) {
         fetch(apiUrlRapid, options).then(function(response) {
             if (response.ok) {
                 response.json().then(function(data) {
-                    drugGenericName = data[0].generic_name
-                    console.log(drugGenericName);
+                    drugGenericName = limit (data[0].generic_name, 30);
 
                     var drugDataObj = {
                         name: drugNameInput,
@@ -104,19 +107,15 @@ var formSubmitHandler = function(event) {
 }
 
 var createDrugEl = function(drugDataObj) {
-    console.log(drugDataObj);
-
     //create a list item container for the query
     var listItemEl = document.createElement("li");
     listItemEl.className = "drug-item"
-
     //add data id to the item container
     listItemEl.setAttribute("data-drug-id", drugIdCounter);
 
     //create a heading for the li
     var drugHeadingEl=document.createElement("div");
     drugHeadingEl.className = "drug-heading";
-
     //create the heading for the li
     drugHeadingEl.innerHTML = "<h2 class='drug-name'>" + drugDataObj.medication + "</h2>";
     //append heading to the li 
@@ -152,5 +151,25 @@ var saveDrugs = function () {
   localStorage.setItem("drugs", JSON.stringify(drugs));
 };
 
+var loadDrugs = function () {
+    var savedDrugs = localStorage.getItem("drugs");
+    //if no drugs, set drugs to empty array and exit function
+    if (!savedDrugs) {
+        return false;
+    }
+    console.log("saved drugs found");
+
+    //parse local storage into JSON
+    savedDrugs = JSON.parse(savedDrugs);
+
+    //loop through savedDrugs array to append the localStorage to the page at the startup of the page
+    for (var i=0; i < savedDrugs.length; i++) {
+        createDrugEl(savedDrugs[i]);
+    }
+    console.log(savedDrugs)
+}
+
 // event listener for form submission
 buttonEl.addEventListener('click', formSubmitHandler);
+
+loadDrugs();
