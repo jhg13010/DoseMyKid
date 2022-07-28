@@ -52,15 +52,26 @@ var formSubmitHandler = function(event) {
                 'X-RapidAPI-Host': 'drug-info-and-price-history.p.rapidapi.com'
             }
         };
-        fetch(apiUrlRapid, options).then(function(response)
-            .then(response => response.json())
-            .then(response => console.log(response))
+        fetch(apiUrlRapid, options).then(function(response) {
+            if (response.ok) {
+                response.json().then(function(data) {
+                    drugGenericName = data[0].generic_name
+                    console.log(drugGenericName);
 
-            .catch(err => console.error(err));
-
-        
-
-        console.log(drugGenericName)
+                    var drugDataObj = {
+                        name: drugNameInput,
+                        age: drugAgeInput,
+                        weight: drugWeightInput,
+                        medication: drugMedicationInput,
+                        dosage: drugDosageInput,
+                        indication: drugUseInput,
+                        Generic_Name: drugGenericName,
+                    }
+                    console.log(drugDataObj);
+                    createDrugEl(drugDataObj);
+                });
+            };
+        });
     };
 
     var displayDrugInfo = function(info) {
@@ -72,16 +83,6 @@ var formSubmitHandler = function(event) {
         } else if (drugIndication.includes("allergic")) {
             drugUseInput = "Allergies";
         }
-        var drugDataObj = {
-            name: drugNameInput,
-            age: drugAgeInput,
-            weight: drugWeightInput,
-            medication: drugMedicationInput,
-            dosage: drugDosageInput,
-            indication: drugUseInput,
-            Generic_Name: drugGenericName;
-        }
-        createDrugEl(drugDataObj);
     }   
 
     var getDosage = function() {
@@ -130,7 +131,7 @@ var createDrugEl = function(drugDataObj) {
 
     var patientInfoEl=document.createElement("p");
     patientInfoEl.className="patient-info";
-    patientInfoEl.innerHTML = "Name: " + drugDataObj.name + "<br> Age: " + drugDataObj.age + "<br> Indication: " + drugDataObj.indication;
+    patientInfoEl.innerHTML = "Name: " + drugDataObj.name + "<br> Age: " + drugDataObj.age + "<br> Indication: " + drugDataObj.indication + "<br> Generic Name: " + drugDataObj.Generic_Name;
     listItemEl.appendChild(patientInfoEl)
 
     //append drug query to the queries listing
@@ -155,9 +156,3 @@ var saveDrugs = function() {
 
 // event listener for form submission
 buttonEl.addEventListener('click', formSubmitHandler);
-
-var secondApi = function() {
-
-}
-
-secondApi();
