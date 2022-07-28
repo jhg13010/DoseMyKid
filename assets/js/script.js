@@ -66,9 +66,8 @@ var formSubmitHandler = function(event) {
                         medication: drugMedicationInput,
                         dosage: drugDosageInput,
                         indication: drugUseInput,
-                        Generic_Name: drugGenericName,
+                        generic: drugGenericName,
                     }
-                    console.log(drugDataObj);
                     createDrugEl(drugDataObj);
                 });
             };
@@ -85,7 +84,6 @@ var formSubmitHandler = function(event) {
             drugUseInput = "Allergies";
         }
     }   
-
     var getDosage = function() {
         if (drugMedicationInput === "Acetaminophen") {
             drugDosageInput = drugWeightInput*15 + "mgs";
@@ -103,7 +101,6 @@ var formSubmitHandler = function(event) {
 
     //reset form 
     formEl.reset();
-
 }
 
 var createDrugEl = function(drugDataObj) {
@@ -132,7 +129,7 @@ var createDrugEl = function(drugDataObj) {
 
     var patientInfoEl=document.createElement("p");
     patientInfoEl.className="patient-info";
-    patientInfoEl.innerHTML = "Name: " + drugDataObj.name + "<br> Age: " + drugDataObj.age + "<br> Indication: " + drugDataObj.indication + "<br> Generic Name: " + drugDataObj.Generic_Name;
+    patientInfoEl.innerHTML = "Name: " + drugDataObj.name + "<br> Age: " + drugDataObj.age + "<br> Indication: " + drugDataObj.indication + "<br> Generic Name: " + drugDataObj.generic;
     listItemEl.appendChild(patientInfoEl)
 
     //append drug query to the queries listing
@@ -143,94 +140,11 @@ var createDrugEl = function(drugDataObj) {
     //assign the query array to the drugs array for us in localStorage 
     drugs.push(drugDataObj);
 
-  var displayDrugInfo = function (info) {
-    var drugIndication = info.results[0].indications_and_usage[0];
+      //increment the counter for the next query
+    drugIdCounter++;
 
-    if (drugIndication.includes("pain" || "PAIN")) {
-      drugUseInput = "Pain";
-    } else if (drugIndication.includes("allergic")) {
-      drugUseInput = "Allergies";
-    }
-    var drugDataObj = {
-      name: drugNameInput,
-      age: drugAgeInput,
-      weight: drugWeightInput,
-      medication: drugMedicationInput,
-      dosage: drugDosageInput,
-      indication: drugUseInput,
-    };
-    createDrugEl(drugDataObj);
-  };
-
-  var getDosage = function () {
-    if (drugMedicationInput === "Acetaminophen") {
-      drugDosageInput = drugWeightInput * 15 + "mg";
-    } else if (drugMedicationInput === "Ibuprofen") {
-      drugDosageInput = drugWeightInput * 10 + "mg";
-    } else if (drugMedicationInput === "Benadryl") {
-      drugDosageInput = drugWeightInput * 2 + "mg";
-    }
-  };
-
-  getDosage();
-  getDrugInfo(drugMedicationInput);
-
-  //reset form
-  formEl.reset();
-};
-
-var createDrugEl = function (drugDataObj) {
-  console.log(drugDataObj);
-
-  //create a list item container for the query
-  var listItemEl = document.createElement("li");
-  listItemEl.className = "drug-item";
-
-  //add data id to the item container
-  listItemEl.setAttribute("data-drug-id", drugIdCounter);
-
-  //create a heading for the li
-  var drugHeadingEl = document.createElement("div");
-  drugHeadingEl.className = "drug-heading";
-
-  //create the heading for the li
-  drugHeadingEl.innerHTML =
-    "<h2 class='drug-name'>" + drugDataObj.medication + "</h2>";
-  //append heading to the li
-  listItemEl.appendChild(drugHeadingEl);
-
-  var drugDosageEl = document.createElement("div");
-  drugDosageEl.className = "dosage-info";
-  drugDosageEl.innerHTML =
-    "<h3 class='dosage-info'> Your Child's Dose: " +
-    drugDataObj.dosage +
-    "</h3>";
-  listItemEl.appendChild(drugDosageEl);
-
-  var patientInfoEl = document.createElement("p");
-  patientInfoEl.className = "patient-info";
-  patientInfoEl.innerHTML =
-    "Name: " +
-    drugDataObj.name +
-    "<br> Age: " +
-    drugDataObj.age +
-    "<br> Indication: " +
-    drugDataObj.indication;
-  listItemEl.appendChild(patientInfoEl);
-
-  //append drug query to the queries listing
-  drugListEl.appendChild(listItemEl);
-
-  //assign the query array the id of the counter
-  drugDataObj.id = drugIdCounter;
-  //assign the query array to the drugs array for us in localStorage
-  drugs.push(drugDataObj);
-
-  //increment the counter for the next query
-  drugIdCounter++;
-
-  saveDrugs();
-};
+    saveDrugs();
+}
 
 console.log(drugs);
 
