@@ -31,7 +31,7 @@ var formSubmitHandler = function(event) {
     }
     
     var getDrugInfo = function(drug) {
-        var apiUrlFDA = "https://api.fda.gov/drug/label.json?search=indications_and_usage:" + drug;
+        var apiUrlFDA = "https://api.fda.gov/drug/label.json?search=indications_and_usage:"+ drug;
 
         var drugInfo = fetch(apiUrlFDA).then(function(response) {
             if (response.ok) {
@@ -43,7 +43,7 @@ var formSubmitHandler = function(event) {
             };
         })
 
-        var apiUrlRapid = "https://drug-info-and-price-history.p.rapidapi.com/1/druginfo?drug=" + drug;
+        var apiUrlRapid = "https://drug-info-and-price-history.p.rapidapi.com/1/druginfo?drug="+ drug;
 
         const options = {
             method: 'GET',
@@ -85,10 +85,10 @@ var formSubmitHandler = function(event) {
         }
     }   
     var getDosage = function() {
-        if (drugMedicationInput === "Acetaminophen") {
+        if (drugMedicationInput === "Tylenol") {
             drugDosageInput = drugWeightInput*15 + "mgs";
     
-        } else if (drugMedicationInput === "Ibuprofen") {   
+        } else if (drugMedicationInput === "Motrin") {   
             drugDosageInput = drugWeightInput*10 + "mgs";
     
         } else if (drugMedicationInput === "Benadryl") {
